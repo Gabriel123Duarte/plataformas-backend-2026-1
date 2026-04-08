@@ -22,7 +22,6 @@ media/
 staticfiles/
 
 # IDEs e Editores (VS Code, PyCharm, etc.)
-.vscode/
 .idea/
 *.swp
 

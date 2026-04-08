@@ -6,5 +6,5 @@
 
 1. Crie o seu Venv: py -m venv venv
 2. Ative o Venv: venv\Scripts\activate
-2. Instale todos os plugins necessários: py -m pip install -r requirements.txt
-3. Inicie o projeto: py manage.py runserver
+3. Instale todos os plugins necessários: py -m pip install -r requirements.txt
+4. Inicie o projeto: py manage.py runserver

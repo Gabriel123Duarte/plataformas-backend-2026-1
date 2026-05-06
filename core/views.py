@@ -4,6 +4,12 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
 from core.forms import AlunoForm
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Curso, Aluno
+from .serializers import CursoSerializer, AlunoSerializer
 
 
 def aluno_novo(request):
@@ -51,3 +57,38 @@ def homepage(request):
         return HttpResponse("Método PUT não permitido")
     else:
         return HttpResponse("Método desconhecido")
+
+
+class CursoViewSet(viewsets.ModelViewSet):
+    queryset = Curso.objects.all()
+    serializer_class = CursoSerializer
+
+
+class AlunoViewSet(viewsets.ModelViewSet):
+    queryset = Aluno.objects.all()
+    serializer_class = AlunoSerializer
+
+    @action(detail=False, methods=["post"], url_path="matricular")
+    def matricular_aluno(self, request):
+        aluno_id = request.data.get("aluno_id")
+        curso_id = request.data.get("curso_id")
+
+        print(aluno_id)
+        print(curso_id)
+
+        if not aluno_id or not curso_id:
+            return Response(
+                {"erro", "Aluno e Curso são obrigatórios"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        return Response({"ok"}, status=status.HTTP_200_OK)
+
+    def get_queryset(self):
+        curso = self.request.query_params.get("curso")
+
+        if curso:
+
+            return Aluno.objects.filter(curso=curso)
+
+        return Aluno.objects.all()

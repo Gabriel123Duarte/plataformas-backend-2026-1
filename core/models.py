@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class Curso(models.Model):
     nome = models.CharField(max_length=100)
+    carga_horaria = models.IntegerField(default=0)
 
     def __str__(self):
         return self.nome
@@ -13,7 +14,7 @@ class Aluno(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField(default="teste@teste.com")
     idade = models.IntegerField()
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.nome

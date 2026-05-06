@@ -11,6 +11,7 @@ class Curso(models.Model):
 
 class Aluno(models.Model):
     nome = models.CharField(max_length=100)
+    email = models.EmailField(default="teste@teste.com")
     idade = models.IntegerField()
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
 

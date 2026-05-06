@@ -1,7 +1,30 @@
 import logging
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
+
+from core.forms import AlunoForm
+
+
+def aluno_novo(request):
+
+    if request.method == "POST":
+        form = AlunoForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("aluno_novo")
+        else:
+            print("Erro", form.errors)
+    else:
+        form = AlunoForm()
+    return render(
+        request,
+        "aluno_form.html",
+        {
+            "form": form,
+        },
+    )
 
 
 # Create your views here.

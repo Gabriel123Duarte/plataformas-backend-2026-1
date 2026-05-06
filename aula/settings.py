@@ -78,16 +78,15 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     },
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'your_database_name',
-    #     'USER': 'your_database_user',
-    #     'PASSWORD': 'your_database_password',
-    #     'HOST': 'localhost',  # Use '127.0.0.1' or the IP of your DB server
-    #     'PORT': '5432',       # Standard PostgreSQL port
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": "postgres",
+    #     "USER": "postgres",
+    #     "PASSWORD": "54W2s9seDDPOLWcyFuV6yezrgjqX56hBpm3PA8bJyKtZNXYY9d7ARLJCq9veTiGO",
+    #     "HOST": "177.153.69.121",  # Use '127.0.0.1' or the IP of your DB server
+    #     "PORT": "5460",  # Standard PostgreSQL port
     # }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

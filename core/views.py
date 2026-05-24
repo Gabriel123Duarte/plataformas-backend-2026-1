@@ -82,13 +82,41 @@ class AlunoViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        return Response({"ok"}, status=status.HTTP_200_OK)
+        try:
+            aluno = Aluno.objects.get(id=aluno_id)
+        except Aluno.DoesNotExist:
+            return Response(
+                {"erro": "Aluno não encontrado"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        try:
+            curso = Curso.objects.get(id=curso_id)
+        except Curso.DoesNotExist:
+            return Response(
+                {"erro": "Curso não encontrado"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        if aluno.curso == curso:
+            return Response(
+                {"erro": "Aluno já está matriculado nesse curso"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        aluno.curso = curso
+        aluno.save()
+
+        return Response(
+            {
+                "mensagem": "Matricula realizada com sucesso",
+                "aluno": aluno.nome,
+                "curso": curso.nome,
+            },
+            status=status.HTTP_200_OK,
+        )
 
     def get_queryset(self):
         curso = self.request.query_params.get("curso")
-
         if curso:
-
             return Aluno.objects.filter(curso=curso)
 
         return Aluno.objects.all()

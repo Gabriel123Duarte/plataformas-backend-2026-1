@@ -7,7 +7,7 @@ class Curso(models.Model):
     carga_horaria = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.nome
+        return self.nome + " " + self.carga_horaria
 
 
 class Aluno(models.Model):
@@ -15,6 +15,7 @@ class Aluno(models.Model):
     email = models.EmailField(default="teste@teste.com")
     idade = models.IntegerField()
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE, blank=True, null=True)
+    telefone = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
         return self.nome
